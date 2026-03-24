@@ -1,4 +1,5 @@
-@echo off`r`nsetlocal EnableExtensions DisableDelayedExpansion
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
 
 REM Always run from this script's folder
 pushd "%~dp0"
