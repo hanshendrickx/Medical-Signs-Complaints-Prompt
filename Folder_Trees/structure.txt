@@ -1,0 +1,119 @@
+PROJECT Project Tree Generated on 2026-03-23 15:13:26
+Root: 
+(c) 2024 Hans Hendrickx - MIT License
+Professional Folder Tree Generator
+
+Project Structure Legend:
+📂 - Key Project Directory
+📁 - Regular Directory
+🐍 - Python Source File
+📓 - Jupyter Notebook
+📝 - Markdown File
+📊 - Excel or CSV File
+📄 - PDF File
+📃 - Word Document
+⚙️ - Batch/Script File
+🔧 - JSON or Config File
+🖼️ - Image File
+🎵 - Audio File
+🎬 - Video File
+--------------------------------------------------------------------------------
+
+📂 MYSCC26/
+├─ 📁 accounts/
+│ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 admin.cpython-314.pyc
+│ │ ├─ 📄 apps.cpython-314.pyc
+│ │ ├─ 📄 models.cpython-314.pyc
+│ │ ├─ 📄 urls.cpython-314.pyc
+│ │ └─ 📄 views.cpython-314.pyc
+│ ├─ 📂 migrations/
+│ │ ├─ 📁 __pycache__/
+│ │ ├─ 🐍 0001_initial.py
+│ │ └─ 🐍 __init__.py
+│ ├─ 🐍 __init__.py
+│ ├─ 🐍 admin.py
+│ ├─ 🐍 apps.py
+│ ├─ 🐍 models.py
+│ ├─ 🐍 tests.py
+│ ├─ 🐍 urls.py
+│ └─ 🐍 views.py
+├─ 📁 complaints/
+│ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 admin.cpython-314.pyc
+│ │ ├─ 📄 apps.cpython-314.pyc
+│ │ └─ 📄 models.cpython-314.pyc
+│ ├─ 📂 migrations/
+│ │ ├─ 📁 __pycache__/
+│ │ ├─ 🐍 0001_initial.py
+│ │ └─ 🐍 __init__.py
+│ ├─ 🐍 __init__.py
+│ ├─ 🐍 admin.py
+│ ├─ 🐍 ai_summary.py
+│ ├─ 🐍 apps.py
+│ ├─ 🐍 models.py
+│ ├─ 🐍 serializers.py
+│ ├─ 🐍 tests.py
+│ └─ 🐍 views.py
+├─ 📂 docs/
+│ ├─ 📝 api.md
+│ ├─ 📝 security.md
+│ ├─ 📄 security.pdf
+│ └─ 📝 setup.md
+├─ 📁 Folder_Trees/
+├─ 📁 media/
+├─ 📁 scc/
+│ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 settings.cpython-314.pyc
+│ │ ├─ 📄 urls.cpython-314.pyc
+│ │ └─ 📄 wsgi.cpython-314.pyc
+│ ├─ 🐍 __init__.py
+│ ├─ 🐍 asgi.py
+│ ├─ 📝 DISCLAIMER FOR MEDICAL APP.md
+│ ├─ 📄 DISCLAIMER FOR MEDICAL APP.pdf
+│ ├─ 📄 LICENSE
+│ ├─ 📄 MYSCC26.code-workspace
+│ ├─ 🐍 settings.py
+│ ├─ ⚙️ setup_scc_app.bat
+│ ├─ 🐍 urls.py
+│ └─ 🐍 wsgi.py
+├─ 📂 static/
+│ ├─ 📁 css/
+│ ├─ 📁 images/
+│ └─ 📁 js/
+├─ 📂 templates/
+│ ├─ 📁 accounts/
+│ │ ├─ 📁 accounts/
+│ │ ├─ 🌐 base.html
+│ │ └─ 🌐 home.html
+│ └─ 🌐 base.html
+├─ ⚙️ !Folder_Tree.bat
+├─ 📄 !restart_scc.cmd
+├─ ⚙️ !restartVE.bat
+├─ ⚙️ !sync_black_ruff_env.bat
+├─ 🐍 _patch_home.py
+├─ 📄 db.sqlite3
+├─ 📄 db.sqlite3.pre_recovery.bak
+├─ 📄 db.sqlite3.pre_reset_20260321.bak
+├─ 🐍 Folder_Tree.py
+├─ 🐍 main.py
+├─ 🐍 manage.py
+├─ 🔧 pyproject.toml
+├─ 📝 README.md
+├─ 📄 README.pdf
+├─ 📄 recover_django.cmd
+├─ 📄 requirements.txt
+├─ 📄 requirementsFT.txt
+├─ 📄 setuo_scc_aoo,bat
+├─ 📄 structure.txt
+├─ 📄 uv.lock
+├─ 📄 verify_home.txt
+└─ 📄 write_test.tmp
+
+--------------------------------------------------------------------------------
+Total Folders: 21
+Total Files: 72
+Total Size: 4.9 MB

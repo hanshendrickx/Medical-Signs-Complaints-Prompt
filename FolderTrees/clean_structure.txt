@@ -1,0 +1,100 @@
+PROJECT Project Tree Generated on 2026-03-23 15:16:15
+Root: 
+(c) 2024 Hans Hendrickx - MIT License
+Professional Folder Tree Generator
+
+Project Structure Legend:
+📂 - Key Project Directory
+📁 - Regular Directory
+🐍 - Python Source File
+📓 - Jupyter Notebook
+📝 - Markdown File
+📊 - Excel or CSV File
+📄 - PDF File
+📃 - Word Document
+⚙️ - Batch/Script File
+🔧 - JSON or Config File
+🖼️ - Image File
+🎵 - Audio File
+🎬 - Video File
+--------------------------------------------------------------------------------
+
+📂 MYSCC26/
+├─ 📁 accounts/
+│ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 admin.cpython-314.pyc
+│ │ ├─ 📄 apps.cpython-314.pyc
+│ │ ├─ 📄 models.cpython-314.pyc
+│ │ ├─ 📄 urls.cpython-314.pyc
+│ │ └─ ... (1 more files)
+│ ├─ 📂 migrations/
+│ │ ├─ 📁 __pycache__/
+│ │ ├─ 🐍 0001_initial.py
+│ │ └─ 🐍 __init__.py
+│ ├─ 🐍 __init__.py
+│ ├─ 🐍 admin.py
+│ ├─ 🐍 apps.py
+│ ├─ 🐍 models.py
+│ ├─ 🐍 tests.py
+│ └─ ... (2 more files)
+├─ 📁 complaints/
+│ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 admin.cpython-314.pyc
+│ │ ├─ 📄 apps.cpython-314.pyc
+│ │ └─ 📄 models.cpython-314.pyc
+│ ├─ 📂 migrations/
+│ │ ├─ 📁 __pycache__/
+│ │ ├─ 🐍 0001_initial.py
+│ │ └─ 🐍 __init__.py
+│ ├─ 🐍 __init__.py
+│ ├─ 🐍 admin.py
+│ ├─ 🐍 ai_summary.py
+│ ├─ 🐍 apps.py
+│ ├─ 🐍 models.py
+│ └─ ... (3 more files)
+├─ 📂 docs/
+│ ├─ 📝 api.md
+│ ├─ 📝 security.md
+│ ├─ 📄 security.pdf
+│ └─ 📝 setup.md
+├─ 📁 Folder_Trees/
+│ ├─ 📄 clean_structure.txt
+│ └─ 📄 structure.txt
+├─ 📁 FolderTrees/
+│ └─ 📄 structure.txt
+├─ 📁 media/
+├─ 📁 scc/
+│ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 settings.cpython-314.pyc
+│ │ ├─ 📄 urls.cpython-314.pyc
+│ │ └─ 📄 wsgi.cpython-314.pyc
+│ ├─ 🐍 __init__.py
+│ ├─ 🐍 asgi.py
+│ ├─ 📝 DISCLAIMER FOR MEDICAL APP.md
+│ ├─ 📄 DISCLAIMER FOR MEDICAL APP.pdf
+│ ├─ 📄 LICENSE
+│ └─ ... (5 more files)
+├─ 📂 static/
+│ ├─ 📁 css/
+│ ├─ 📁 images/
+│ └─ 📁 js/
+├─ 📂 templates/
+│ ├─ 📁 accounts/
+│ │ ├─ 📁 accounts/
+│ │ ├─ 🌐 base.html
+│ │ └─ 🌐 home.html
+│ └─ 🌐 base.html
+├─ ⚙️ !Folder_Tree.bat
+├─ 📄 !restart_scc.cmd
+├─ ⚙️ !restartVE.bat
+├─ ⚙️ !sync_black_ruff_env.bat
+├─ 🐍 _patch_home.py
+└─ ... (17 more files)
+
+--------------------------------------------------------------------------------
+Total Folders: 22
+Total Files: 47
+Total Size: 116.9 KB

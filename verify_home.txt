@@ -1,0 +1,2 @@
+templates/accounts/home.html 4682
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta '
