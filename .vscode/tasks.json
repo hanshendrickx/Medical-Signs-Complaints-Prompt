@@ -649,6 +649,103 @@
 				"Set-Content -LiteralPath 'c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD' -Value 'HELLO' -Encoding Ascii"
 			],
 			"isBackground": false
+		},
+		{
+			"label": "Cleanup Git helper scripts",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"(echo @echo off&echo setlocal EnableExtensions DisableDelayedExpansion&echo pushd \"%%~dp0\"&echo.&echo set \"REPO_URL=https://github.com/hanshendrickx/Medical-Signs-Complaints-Prompt.git\"&echo set \"REPO_NAME=Medical-Signs-Complaints-Prompt\"&echo set \"BRANCH=main\"&echo.&echo if /I \"%%~1\"==\"\" goto menu&echo if /I \"%%~1\"==\"help\" goto help&echo if /I \"%%~1\"==\"status\" goto status&echo if /I \"%%~1\"==\"link\" goto link&echo if /I \"%%~1\"==\"push\" goto push&echo if /I \"%%~1\"==\"pull\" goto pull&echo if /I \"%%~1\"==\"clone\" goto clone&echo echo [ERROR] Unknown command: %%~1&echo goto help&echo.&echo :menu&echo echo.&echo echo ==============================&echo echo   !GITHUB.CMD Helper&echo echo ==============================&echo echo [1] Push codes to GitHub&echo echo [2] Pull or update codes&echo echo [3] Git status&echo echo [4] Link repo to origin&echo echo [5] Full clone to a folder&echo echo [0] Exit&echo set /p CH=Select option: &echo if \"%%CH%%\"==\"1\" goto push&echo if \"%%CH%%\"==\"2\" goto pull&echo if \"%%CH%%\"==\"3\" goto status&echo if \"%%CH%%\"==\"4\" goto link&echo if \"%%CH%%\"==\"5\" goto clone&echo if \"%%CH%%\"==\"0\" goto endok&echo echo [ERROR] Invalid choice.&echo goto menu&echo.&echo :help&echo echo Usage:&echo echo   !GITHUB.CMD push&echo echo   !GITHUB.CMD pull&echo echo   !GITHUB.CMD status&echo echo   !GITHUB.CMD link&echo echo   !GITHUB.CMD clone&echo echo   !GITHUB.CMD help&echo goto endok&echo.&echo :ensure_git&echo git rev-parse --is-inside-work-tree ^>nul 2^>^&1&echo if errorlevel 1 ^(&echo   echo [ERROR] This folder is not a Git repo.&echo   echo [HINT] Run these once: git init ^& git branch -M main&echo   goto enderr&echo ^)&echo exit /b 0&echo.&echo :status&echo call :ensure_git ^|^| goto enderr&echo git status -sb&echo echo.&echo git remote -v&echo goto endok&echo.&echo :link&echo call :ensure_git ^|^| goto enderr&echo git remote get-url origin ^>nul 2^>^&1&echo if errorlevel 1 ^(&echo   git remote add origin \"%%REPO_URL%%\"&echo ^) else ^(&echo   git remote set-url origin \"%%REPO_URL%%\"&echo ^)&echo echo [OK] origin =&echo git remote get-url origin&echo goto endok&echo.&echo :push&echo if exist \"%%~dp0!PUSH.CMD\" ^(&echo   call \"%%~dp0!PUSH.CMD\"&echo   if errorlevel 1 goto enderr&echo   goto endok&echo ^)&echo echo [ERROR] Missing !PUSH.CMD in this folder.&echo goto enderr&echo.&echo :pull&echo call :ensure_git ^|^| goto enderr&echo call :link ^>nul&echo git fetch origin&echo if errorlevel 1 goto enderr&echo git pull --rebase origin \"%%BRANCH%%\"&echo if errorlevel 1 goto enderr&echo echo [OK] Pull complete.&echo goto endok&echo.&echo :clone&echo set /p TARGET=Parent folder for full clone (default current): &echo if \"%%TARGET%%\"==\"\" set \"TARGET=%%CD%%\"&echo set \"DEST=%%TARGET%%\\%%REPO_NAME%%\"&echo if exist \"%%DEST%%\\.git\" ^(&echo   echo [INFO] Repo already exists: %%DEST%%&echo   goto endok&echo ^)&echo git clone \"%%REPO_URL%%\" \"%%DEST%%\"&echo if errorlevel 1 goto enderr&echo echo [OK] Clone complete: %%DEST%%&echo.&echo :endok&echo popd&echo exit /b 0&echo.&echo :enderr&echo popd&echo exit /b 1) > \"!GITHUB.CMD\" && (echo @echo off&echo setlocal EnableExtensions DisableDelayedExpansion&echo REM Always run from this script's folder&echo pushd \"%%~dp0\"&echo.&echo set \"REPO_URL=https://github.com/hanshendrickx/Medical-Signs-Complaints-Prompt.git\"&echo set \"BRANCH=main\"&echo.&echo echo [INFO] Checking git repo...&echo git rev-parse --is-inside-work-tree ^>nul 2^>^&1&echo if errorlevel 1 ^(&echo   echo [ERROR] Not a git repo in this folder.&echo   echo [HINT] Run: git init&echo   pause&echo   popd&echo   exit /b 1&echo ^)&echo.&echo for /f \"delims=\" %%%%I in ('git rev-parse --show-toplevel 2^>nul') do set \"TOP=%%%%~fI\"&echo for %%%%I in (\"%%CD%%\") do set \"CUR=%%%%~fI\"&echo.&echo if /I not \"%%TOP%%\"==\"%%CUR%%\" ^(&echo   echo [ERROR] Active git root is:&echo   echo        %%TOP%%&echo   echo [ERROR] Current folder is:&echo   echo        %%CUR%%&echo   echo [HINT] You are inside a parent repo. Fix that first, then retry.&echo   pause&echo   popd&echo   exit /b 1&echo ^)&echo.&echo echo [INFO] Setting origin...&echo git remote get-url origin ^>nul 2^>^&1&echo if errorlevel 1 ^(&echo   git remote add origin \"%%REPO_URL%%\"&echo ^) else ^(&echo   git remote set-url origin \"%%REPO_URL%%\"&echo ^)&echo.&echo set /p MSG=Commit message (Enter for auto):&echo if \"%%MSG%%\"==\"\" set \"MSG=Update %%DATE%% %%TIME%%\"&echo.&echo git add -A .&echo git diff --cached --quiet ^>nul 2^>^&1&echo if errorlevel 1 ^(&echo   git commit -m \"%%MSG%%\"&echo   if errorlevel 1 ^(&echo     echo [ERROR] Commit failed.&echo     pause&echo     popd&echo     exit /b 1&echo   ^)&echo ^) else ^(&echo   echo [INFO] Nothing new to commit.&echo ^)&echo.&echo git push -u origin \"%%BRANCH%%\"&echo if errorlevel 1 ^(&echo   echo [ERROR] Push failed.&echo   pause&echo   popd&echo   exit /b 1&echo ^)&echo.&echo echo [OK] Push complete to %%REPO_URL%%&echo pause&echo popd&echo exit /b 0) > \"!PUSH.CMD\" && del /q \"!Github_push.py\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite !GITHUB.CMD clean",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$content = @'\n@echo off\nsetlocal EnableExtensions DisableDelayedExpansion\npushd \"%~dp0\"\n\nset \"REPO_URL=https://github.com/hanshendrickx/Medical-Signs-Complaints-Prompt.git\"\nset \"REPO_NAME=Medical-Signs-Complaints-Prompt\"\nset \"BRANCH=main\"\n\nif /I \"%~1\"==\"\" goto menu\nif /I \"%~1\"==\"help\" goto help\nif /I \"%~1\"==\"status\" goto status\nif /I \"%~1\"==\"link\" goto link\nif /I \"%~1\"==\"push\" goto push\nif /I \"%~1\"==\"pull\" goto pull\nif /I \"%~1\"==\"clone\" goto clone\necho [ERROR] Unknown command: %~1\ngoto help\n\n:menu\necho.\necho ==============================\necho   !GITHUB.CMD Helper\necho ==============================\necho [1] Push codes to GitHub\necho [2] Pull or update codes\necho [3] Git status\necho [4] Link repo to origin\necho [5] Full clone to a folder\necho [0] Exit\nset /p CH=Select option:\nif \"%CH%\"==\"1\" goto push\nif \"%CH%\"==\"2\" goto pull\nif \"%CH%\"==\"3\" goto status\nif \"%CH%\"==\"4\" goto link\nif \"%CH%\"==\"5\" goto clone\nif \"%CH%\"==\"0\" goto endok\necho [ERROR] Invalid choice.\ngoto menu\n\n:help\necho Usage:\necho   !GITHUB.CMD push\necho   !GITHUB.CMD pull\necho   !GITHUB.CMD status\necho   !GITHUB.CMD link\necho   !GITHUB.CMD clone\necho   !GITHUB.CMD help\ngoto endok\n\n:ensure_git\ngit rev-parse --is-inside-work-tree >nul 2>&1\nif errorlevel 1 (\n  echo [ERROR] This folder is not a Git repo.\n  echo [HINT] Run these once: git init ^& git branch -M main\n  goto enderr\n)\nexit /b 0\n\n:status\ncall :ensure_git || goto enderr\ngit status -sb\necho.\ngit remote -v\ngoto endok\n\n:link\ncall :ensure_git || goto enderr\ngit remote get-url origin >nul 2>&1\nif errorlevel 1 (\n  git remote add origin \"%REPO_URL%\"\n) else (\n  git remote set-url origin \"%REPO_URL%\"\n)\necho [OK] origin =\ngit remote get-url origin\ngoto endok\n\n:push\nif exist \"%~dp0!PUSH.CMD\" (\n  call \"%~dp0!PUSH.CMD\"\n  if errorlevel 1 goto enderr\n  goto endok\n)\necho [ERROR] Missing !PUSH.CMD in this folder.\ngoto enderr\n\n:pull\ncall :ensure_git || goto enderr\ncall :link >nul\ngit fetch origin\nif errorlevel 1 goto enderr\ngit pull --rebase origin \"%BRANCH%\"\nif errorlevel 1 goto enderr\necho [OK] Pull complete.\ngoto endok\n\n:clone\nset /p TARGET=Parent folder for full clone (default current):\nif \"%TARGET%\"==\"\" set \"TARGET=%CD%\"\nset \"DEST=%TARGET%\\%REPO_NAME%\"\nif exist \"%DEST%\\.git\" (\n  echo [INFO] Repo already exists: %DEST%\n  goto endok\n)\ngit clone \"%REPO_URL%\" \"%DEST%\"\nif errorlevel 1 goto enderr\necho [OK] Clone complete: %DEST%\n\n:endok\npopd\nexit /b 0\n\n:enderr\npopd\nexit /b 1\n'@; Set-Content -LiteralPath 'c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD' -Value $content -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Delete obsolete !Github_push.py",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"if exist \"!Github_push.py\" del /q \"!Github_push.py\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch !GITHUB.CMD syntax cleanup",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD'; $c=Get-Content -Raw -LiteralPath $p; $c=$c -replace '%%','%'; $c=$c -replace 'exit /b %0%','exit /b 0'; $c=$c -replace 'set \"MSG=Update %Mon 03/23/2026% %15:40:50.14%\"','set \"MSG=Update %DATE% %TIME%\"'; $c=$c -replace 'set \"TARGET=%C:\\Users\\hansh\\MYSCC26%\"','set \"TARGET=%CD%\"'; Set-Content -LiteralPath $p -Value $c -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch !GITHUB.CMD syntax cleanup exe",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD'; $c=Get-Content -Raw -LiteralPath $p; $c=$c -replace '%%','%'; $c=$c -replace 'exit /b %0%','exit /b 0'; $c=$c -replace 'set \"MSG=Update %Mon 03/23/2026% %15:40:50.14%\"','set \"MSG=Update %DATE% %TIME%\"'; $c=$c -replace 'set \"TARGET=%C:\\Users\\hansh\\MYSCC26%\"','set \"TARGET=%CD%\"'; Set-Content -LiteralPath $p -Value $c -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Literal patch !GITHUB and !PUSH",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$g='c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD'; $c=Get-Content -Raw -LiteralPath $g; $c=$c.Replace('%%','%').Replace('exit /b %0%','exit /b 0').Replace('set \"MSG=Update %Mon 03/23/2026% %15:40:50.14%\"','set \"MSG=Update %DATE% %TIME%\"').Replace('set \"TARGET=%C:\\Users\\hansh\\MYSCC26%\"','set \"TARGET=%CD%\"'); Set-Content -LiteralPath $g -Value $c -Encoding Ascii; $p='c:\\Users\\hansh\\MYSCC26\\!PUSH.CMD'; $x=Get-Content -Raw -LiteralPath $p; $start=$x.IndexOf('setlocal EnableExtensions DisableDelayedExpansion'); if($start -ge 0){ $x='@echo off`r`n'+$x.Substring($start)}; Set-Content -LiteralPath $p -Value $x -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Final cleanup replacements",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$g='c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD'; $c=Get-Content -Raw -LiteralPath $g; $c=$c.Replace('if \"%MSG%\"==\"\" set \"MSG=Update %Mon 03/23/2026% %15:40:50.14%\"','if \"%MSG%\"==\"\" set \"MSG=Update %DATE% %TIME%\"'); $c=$c.Replace('if \"%TARGET%\"==\"\" set \"TARGET=%C:\\Users\\hansh\\MYSCC26%\"','if \"%TARGET%\"==\"\" set \"TARGET=%CD%\"'); Set-Content -LiteralPath $g -Value $c -Encoding Ascii; $p='c:\\Users\\hansh\\MYSCC26\\!PUSH.CMD'; $x=Get-Content -Raw -LiteralPath $p; $x=$x.Replace('@echo off`r`nsetlocal EnableExtensions DisableDelayedExpansion',\"@echo off`r`nsetlocal EnableExtensions DisableDelayedExpansion\"); Set-Content -LiteralPath $p -Value $x -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch !GITHUB two lines",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$g='c:\\Users\\hansh\\MYSCC26\\!GITHUB.CMD'; $c=Get-Content -Raw -LiteralPath $g; $c=$c.Replace('if \"%MSG%\"==\"\" set \"MSG=Update %Mon 03/23/2026% %15:40:50.14%\"','if \"%MSG%\"==\"\" set \"MSG=Update %DATE% %TIME%\"'); $c=$c.Replace('if \"%TARGET%\"==\"\" set \"TARGET=%C:\\Users\\hansh\\MYSCC26%\"','if \"%TARGET%\"==\"\" set \"TARGET=%CD%\"'); Set-Content -LiteralPath $g -Value $c -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix !PUSH first line literal",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='c:\\Users\\hansh\\MYSCC26\\!PUSH.CMD'; $x=Get-Content -Raw -LiteralPath $p; $old='@echo off`r`nsetlocal EnableExtensions DisableDelayedExpansion'; $new=\"@echo off`r`nsetlocal EnableExtensions DisableDelayedExpansion\"; $x=$x.Replace($old,$new); Set-Content -LiteralPath $p -Value $x -Encoding Ascii"
+			],
+			"isBackground": false
 		}
 	]
 }

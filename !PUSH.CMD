@@ -1,14 +1,4 @@
-@echo off
-cd /d c:\Users\hansh\MYSCC26
-git init
-git branch -M main
-git remote remove origin 2>nul
-git remote add origin https://github.com/hanshendrickx/Medical-Signs-Complaints-Prompt.git
-git add -A .
-git commit -m "Push from MYSCC26"
-git push -u origin main
-
-setlocal EnableExtensions DisableDelayedExpansion
+@echo off`r`nsetlocal EnableExtensions DisableDelayedExpansion
 
 REM Always run from this script's folder
 pushd "%~dp0"
