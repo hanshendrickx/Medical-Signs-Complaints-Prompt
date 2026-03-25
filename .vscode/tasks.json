@@ -968,6 +968,949 @@
 				"from pathlib import Path;p=Path(r'c:\\Users\\hansh\\MYSCC26\\templates\\base.html');t=p.read_text(encoding='utf-8');needle='.navbar-brand { font-weight: 700; font-size: 1.15rem; letter-spacing: .06em; }';add='.navbar-brand { font-weight: 700; font-size: 1.15rem; letter-spacing: .06em; }\\n        .navbar .dropdown-menu { min-width: 16rem; }\\n        .navbar .dropdown:hover .dropdown-menu,\\n        .navbar .dropdown:focus-within .dropdown-menu { display: block; }';t=t if '.navbar .dropdown:hover .dropdown-menu' in t else t.replace(needle,add,1);p.write_text(t,encoding='utf-8')"
 			],
 			"isBackground": false
+		},
+		{
+			"label": "Django Check After GeoIP Fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django Check After Root Route Fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django Check After Home Route Write",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django Check After Verified Root Route Fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django Check After Cleanup",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Run Accounts Tests",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"test",
+				"accounts"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix Folder_Tree F401 imports",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='Folder_Tree.py'; $lines=Get-Content -Path $p; $out=$lines | Where-Object { $_ -ne '    from reportlab.lib.utils import ImageReader' -and $_ -ne '    from reportlab.pdfbase import pdfmetrics' -and $_ -ne '    from reportlab.pdfbase.ttfonts import TTFont' }; Set-Content -Path $p -Value $out"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix Folder_Tree F401 imports with pwsh",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='Folder_Tree.py'; $lines=Get-Content -Path $p; $out=$lines | Where-Object { $_ -ne '    from reportlab.lib.utils import ImageReader' -and $_ -ne '    from reportlab.pdfbase import pdfmetrics' -and $_ -ne '    from reportlab.pdfbase.ttfonts import TTFont' }; Set-Content -Path $p -Value $out"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Ruff Check Folder_Tree",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"ruff check Folder_Tree.py"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix root home route now",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path\np=Path('accounts/urls.py')\ns=p.read_text(encoding='utf-8')\nif '    home,' not in s:\n    s=s.replace('from .views import (\\n','from .views import (\\n    home,\\n',1)\nif 'path(\"\", home, name=\"home\")' not in s:\n    s=s.replace('urlpatterns = [\\n','urlpatterns = [\\n    path(\"\", home, name=\"home\"),\\n',1)\np.write_text(s,encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Write tiny marker",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"echo ROOT_FIX_TEST>__root_fix_test.txt"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch accounts urls root route",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; p=Path('accounts/urls.py'); s=p.read_text(encoding='utf-8'); s=s if '    home,' in s else s.replace('from .views import (\\n','from .views import (\\n    home,\\n',1); s=s if 'path(\\\"\\\", home, name=\\\"home\\\")' in s else s.replace('urlpatterns = [\\n','urlpatterns = [\\n    path(\\\"\\\", home, name=\\\"home\\\"),\\n',1); p.write_text(s, encoding='utf-8')\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Python write zzz",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; Path('zzz.txt').write_text('abc', encoding='utf-8')\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite accounts urls with home",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; content='''# accounts/urls.py\n\nfrom django.urls import path\nfrom .views import (\n    home,\n    CreateUserView,\n    GuestUserView,\n    LoginView,\n    LogoutView,\n    CurrentUserView,\n    DeleteUserView,\n    FamilyMembersView,\n    DependentCreateView,\n    DependentUpdateDeleteView,\n    ProxyStatusView,\n)\n\nurlpatterns = [\n    path(\"\", home, name=\"home\"),\n    # Signup & guest\n    path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),\n    path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),\n    # Authentication\n    path(\"login/\", LoginView.as_view(), name=\"login\"),\n    path(\"logout/\", LogoutView.as_view(), name=\"logout\"),\n    # User profile\n    path(\"me/\", CurrentUserView.as_view(), name=\"me\"),\n    path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),\n    # Family management\n    path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),\n    path(\n        \"family/dependents/create/\",\n        DependentCreateView.as_view(),\n        name=\"create_dependent\",\n    ),\n    # Use <int:pk> because FamilyUser uses an integer primary key.\n    # If your model uses a UUID primary key, change to '<uuid:pk>' and ensure the view supports it.\n    path(\n        \"family/dependents/<int:pk>/\",\n        DependentUpdateDeleteView.as_view(),\n        name=\"dependent_detail\",\n    ),\n    # Proxy / guardian status\n    path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),\n]\n'''; Path('accounts/urls.py').write_text(content, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Insert home route by lines",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path\np=Path('accounts/urls.py')\nlines=p.read_text(encoding='utf-8').splitlines()\nif '    home,' not in lines:\n    i=lines.index('from .views import (')+1\n    lines.insert(i,'    home,')\nif '    path(\"\", home, name=\"home\"),' not in lines:\n    j=lines.index('urlpatterns = [')+1\n    lines.insert(j,'    path(\"\", home, name=\"home\"),')\np.write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check root fix verify",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Cleanup temporary marker files",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"if exist __root_fix_test.txt del /q __root_fix_test.txt & if exist zzz.txt del /q zzz.txt"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Create _base template alias",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('templates/_base.html').write_text('{% extends \"base.html\" %}\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Add about view",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/views.py'); s=p.read_text(encoding='utf-8'); block='\\n\\ndef about(request):\\n    return render(request, \"accounts/about.html\")\\n'; s=s+block if 'def about(request):' not in s else s; p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Add about route",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/urls.py'); s=p.read_text(encoding='utf-8'); s=s.replace('from .views import (\\n    home,\\n','from .views import (\\n    home,\\n    about,\\n',1) if '    about,' not in s else s; s=s.replace('urlpatterns = [\\n    path(\"\", home, name=\"home\"),\\n','urlpatterns = [\\n    path(\"\", home, name=\"home\"),\\n    path(\"about/\", about, name=\"about\"),\\n',1) if 'path(\"about/\", about, name=\"about\")' not in s else s; p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check template+about fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix _base template syntax",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('templates/_base.html').write_text('{% extends \"base.html\" %}\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix about view render syntax",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/views.py'); s=p.read_text(encoding='utf-8'); s=s.replace('return render(request, accounts/about.html)','return render(request, \"accounts/about.html\")'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Insert about route line",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/urls.py'); s=p.read_text(encoding='utf-8'); needle='urlpatterns = [\\n    path(\"\", home, name=\"home\"),\\n'; repl='urlpatterns = [\\n    path(\"\", home, name=\"home\"),\\n    path(\"about/\", about, name=\"about\"),\\n'; s=s if 'path(\"about/\", about, name=\"about\")' in s else s.replace(needle, repl, 1); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after about fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Quote-safe template and about fixes",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path\nq=chr(34)\n# fix templates/_base.html\nPath('templates/_base.html').write_text('{% extends '+q+'base.html'+q+' %}\\n', encoding='utf-8')\n# fix accounts/views.py about render line\nvp=Path('accounts/views.py')\nvs=vp.read_text(encoding='utf-8')\nvs=vs.replace('return render(request, accounts/about.html)','return render(request, '+q+'accounts/about.html'+q+')')\nvp.write_text(vs, encoding='utf-8')\n# ensure accounts/urls.py has about route\nup=Path('accounts/urls.py')\nul=up.read_text(encoding='utf-8').splitlines()\nroute='    path('+q+'about/'+q+', about, name='+q+'about'+q+'),' \nif route not in ul:\n    for i,line in enumerate(ul):\n        if 'path(\"\", home, name=\"home\")' in line:\n            ul.insert(i+1, route)\n            break\nup.write_text('\\n'.join(ul)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Force write _base via cmd",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"> templates\\_base.html echo {% extends \"base.html\" %}"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix about view with single quotes",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/views.py'); s=p.read_text(encoding='utf-8'); s=s.replace('return render(request, accounts/about.html)',\"return render(request, 'accounts/about.html')\"); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Insert about route safely",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/urls.py'); lines=p.read_text(encoding='utf-8').splitlines(); target='    path(\"\", home, name=\"home\"),'; route='    path(\"about/\", about, name=\"about\"),'; \nif route not in lines:\n i=lines.index(target)+1 if target in lines else 0\n lines.insert(i, route)\np.write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check final templates",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Add explicit about path",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/urls.py'); lines=p.read_text(encoding='utf-8').splitlines(); route=\"    path('about/', about, name='about'),\"; \nif not any(\"about/\" in x and \"name='about'\" in x for x in lines):\n idx=next((i for i,x in enumerate(lines) if 'path(\"\", home, name=\"home\")' in x), None)\n if idx is None: idx=next((i for i,x in enumerate(lines) if 'urlpatterns = [' in x),0)\n lines.insert(idx+1, route)\np.write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite accounts urls with about route",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"(echo # accounts/urls.py&echo.&echo from django.urls import path&echo from .views import (^&echo     home,^&echo     about,^&echo     CreateUserView,^&echo     GuestUserView,^&echo     LoginView,^&echo     LogoutView,^&echo     CurrentUserView,^&echo     DeleteUserView,^&echo     FamilyMembersView,^&echo     DependentCreateView,^&echo     DependentUpdateDeleteView,^&echo     ProxyStatusView,^&echo ^)&echo.&echo urlpatterns = [&echo     path(\"\", home, name=\"home\"),&echo     path(\"about/\", about, name=\"about\"),&echo     # Signup ^& guest&echo     path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),&echo     path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),&echo     # Authentication&echo     path(\"login/\", LoginView.as_view(), name=\"login\"),&echo     path(\"logout/\", LogoutView.as_view(), name=\"logout\"),&echo     # User profile&echo     path(\"me/\", CurrentUserView.as_view(), name=\"me\"),&echo     path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),&echo     # Family management&echo     path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),&echo     path(^&echo         \"family/dependents/create/\",&echo         DependentCreateView.as_view(),&echo         name=\"create_dependent\",&echo     ^),&echo     # Use ^<int:pk^> because FamilyUser uses an integer primary key.&echo     # If your model uses a UUID primary key, change to '^<uuid:pk^>' and ensure the view supports it.&echo     path(^&echo         \"family/dependents/^<int:pk^>/\",&echo         DependentUpdateDeleteView.as_view(),&echo         name=\"dependent_detail\",&echo     ^),&echo     # Proxy / guardian status&echo     path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),&echo ])>accounts\\urls.py"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Restore accounts urls completely",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; lines=['# accounts/urls.py','', 'from django.urls import path','from .views import (','    home,','    about,','    CreateUserView,','    GuestUserView,','    LoginView,','    LogoutView,','    CurrentUserView,','    DeleteUserView,','    FamilyMembersView,','    DependentCreateView,','    DependentUpdateDeleteView,','    ProxyStatusView,',')','', 'urlpatterns = [','    path(\"\", home, name=\"home\"),','    path(\"about/\", about, name=\"about\"),','    # Signup & guest','    path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),','    path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),','    # Authentication','    path(\"login/\", LoginView.as_view(), name=\"login\"),','    path(\"logout/\", LogoutView.as_view(), name=\"logout\"),','    # User profile','    path(\"me/\", CurrentUserView.as_view(), name=\"me\"),','    path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),','    # Family management','    path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),','    path(','        \"family/dependents/create/\",','        DependentCreateView.as_view(),','        name=\"create_dependent\",','    ),','    # Use <int:pk> because FamilyUser uses an integer primary key.','    # If your model uses a UUID primary key, change to \"<uuid:pk>\" and ensure the view supports it.','    path(','        \"family/dependents/<int:pk>/\",','        DependentUpdateDeleteView.as_view(),','        name=\"dependent_detail\",','    ),','    # Proxy / guardian status','    path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),',']']; Path('accounts/urls.py').write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix about render exact line",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/views.py'); s=p.read_text(encoding='utf-8'); s=s.replace('return render(request, accounts/about.html)', 'return render(request, \"accounts/about.html\")'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after restore",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check about route",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Repair urls views and normalize base extends",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path\n\nurls_lines = [\n    '# accounts/urls.py',\n    '',\n    'from django.urls import path',\n    'from .views import (',\n    '    home,',\n    '    about,',\n    '    CreateUserView,',\n    '    GuestUserView,',\n    '    LoginView,',\n    '    LogoutView,',\n    '    CurrentUserView,',\n    '    DeleteUserView,',\n    '    FamilyMembersView,',\n    '    DependentCreateView,',\n    '    DependentUpdateDeleteView,',\n    '    ProxyStatusView,',\n    ')',\n    '',\n    'urlpatterns = [',\n    '    path(\"\", home, name=\"home\"),',\n    '    path(\"about/\", about, name=\"about\"),',\n    '    # Signup & guest',\n    '    path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),',\n    '    path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),',\n    '    # Authentication',\n    '    path(\"login/\", LoginView.as_view(), name=\"login\"),',\n    '    path(\"logout/\", LogoutView.as_view(), name=\"logout\"),',\n    '    # User profile',\n    '    path(\"me/\", CurrentUserView.as_view(), name=\"me\"),',\n    '    path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),',\n    '    # Family management',\n    '    path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),',\n    '    path(',\n    '        \"family/dependents/create/\",',\n    '        DependentCreateView.as_view(),',\n    '        name=\"create_dependent\",',\n    '    ),',\n    '    # Use <int:pk> because FamilyUser uses an integer primary key.',\n    '    # If your model uses a UUID primary key, change to \"<uuid:pk>\" and ensure the view supports it.',\n    '    path(',\n    '        \"family/dependents/<int:pk>/\",',\n    '        DependentUpdateDeleteView.as_view(),',\n    '        name=\"dependent_detail\",',\n    '    ),',\n    '    # Proxy / guardian status',\n    '    path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),',\n    ']',\n]\nPath('accounts/urls.py').write_text('\\n'.join(urls_lines) + '\\n', encoding='utf-8')\n\nviews_path = Path('accounts/views.py')\nviews_text = views_path.read_text(encoding='utf-8')\nif 'def about(request):' not in views_text:\n    views_text = views_text.rstrip() + '\\n\\n\\ndef about(request):\\n    return render(request, \"accounts/about.html\")\\n'\nviews_text = views_text.replace('return render(request, accounts/about.html)', 'return render(request, \"accounts/about.html\")')\nviews_path.write_text(views_text, encoding='utf-8')\n\nfor path in Path('templates').rglob('*'):\n    if not path.is_file():\n        continue\n    text = path.read_text(encoding='utf-8')\n    new_text = text.replace('{% extends \"_base.html\" %}', '{% extends \"base.html\" %}')\n    new_text = new_text.replace(\"{% extends '_base.html' %}\", '{% extends \"base.html\" %}')\n    if new_text != text:\n        path.write_text(new_text, encoding='utf-8')\n"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after normalization",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Write accounts urls line 1",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"(echo # accounts/urls.py&echo.&echo from django.urls import path&echo from .views import (^&echo     home,^&echo     about,^&echo     CreateUserView,^&echo     GuestUserView,^&echo     LoginView,^&echo     LogoutView,^&echo     CurrentUserView,^&echo     DeleteUserView,^&echo     FamilyMembersView,^&echo     DependentCreateView,^&echo     DependentUpdateDeleteView,^&echo     ProxyStatusView,^&echo ^)&echo.&echo urlpatterns = [&echo     path(\"\", home, name=\"home\"),&echo     path(\"about/\", about, name=\"about\"),&echo     path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),&echo     path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),&echo     path(\"login/\", LoginView.as_view(), name=\"login\"),&echo     path(\"logout/\", LogoutView.as_view(), name=\"logout\"),&echo     path(\"me/\", CurrentUserView.as_view(), name=\"me\"),&echo     path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),&echo     path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),&echo     path(^&echo         \"family/dependents/create/\",&echo         DependentCreateView.as_view(),&echo         name=\"create_dependent\",&echo     ^),&echo     path(^&echo         \"family/dependents/^<int:pk^>/\",&echo         DependentUpdateDeleteView.as_view(),&echo         name=\"dependent_detail\",&echo     ^),&echo     path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),&echo ])>accounts\\urls.py"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix about render with cmd python",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; p=Path('accounts/views.py'); s=p.read_text(encoding='utf-8'); s=s.replace('return render(request, accounts/about.html)', 'return render(request, \\'accounts/about.html\\')'); p.write_text(s, encoding='utf-8')\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Normalize _base extends with cmd python",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; files=list(Path('templates').rglob('*'));\\nfor p in files:\\n    if p.is_file():\\n        s=p.read_text(encoding='utf-8');\\n        s=s.replace('{% extends \\\"_base.html\\\" %}','{% extends \\\"base.html\\\" %}');\\n        s=s.replace(\\\"{% extends '_base.html' %}\\\",'{% extends \\\"base.html\\\" %}');\\n        p.write_text(s, encoding='utf-8')\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Final django check after template normalization",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Compact rewrite accounts urls",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; Path('accounts/urls.py').write_text('from django.urls import path\\nfrom .views import home, about, CreateUserView, GuestUserView, LoginView, LogoutView, CurrentUserView, DeleteUserView, FamilyMembersView, DependentCreateView, DependentUpdateDeleteView, ProxyStatusView\\n\\nurlpatterns = [\\n    path(\\\"\\\", home, name=\\\"home\\\"),\\n    path(\\\"about/\\\", about, name=\\\"about\\\"),\\n    path(\\\"signup/\\\", CreateUserView.as_view(), name=\\\"signup\\\"),\\n    path(\\\"guest/\\\", GuestUserView.as_view(), name=\\\"guest_signup\\\"),\\n    path(\\\"login/\\\", LoginView.as_view(), name=\\\"login\\\"),\\n    path(\\\"logout/\\\", LogoutView.as_view(), name=\\\"logout\\\"),\\n    path(\\\"me/\\\", CurrentUserView.as_view(), name=\\\"me\\\"),\\n    path(\\\"delete/\\\", DeleteUserView.as_view(), name=\\\"delete\\\"),\\n    path(\\\"family/\\\", FamilyMembersView.as_view(), name=\\\"family\\\"),\\n    path(\\\"family/dependents/create/\\\", DependentCreateView.as_view(), name=\\\"create_dependent\\\"),\\n    path(\\\"family/dependents/<int:pk>/\\\", DependentUpdateDeleteView.as_view(), name=\\\"dependent_detail\\\"),\\n    path(\\\"proxy-status/\\\", ProxyStatusView.as_view(), name=\\\"proxy_status\\\"),\\n]\\n', encoding='utf-8')\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Compact fix about view",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; p=Path('accounts/views.py'); s=p.read_text(encoding='utf-8').replace('return render(request, accounts/about.html)', \\\"return render(request, 'accounts/about.html')\\\"); p.write_text(s, encoding='utf-8')\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Compact normalize base extends",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"python -c \"from pathlib import Path; [p.write_text(p.read_text(encoding='utf-8').replace('{% extends \\\"_base.html\\\" %}','{% extends \\\"base.html\\\" %}').replace(\\\"{% extends '_base.html' %}\\\",'{% extends \\\"base.html\\\" %}'), encoding='utf-8') for p in Path('templates').rglob('*') if p.is_file()]\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Direct python restore accounts urls",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('accounts/urls.py').write_text('from django.urls import path\\nfrom .views import home, about, CreateUserView, GuestUserView, LoginView, LogoutView, CurrentUserView, DeleteUserView, FamilyMembersView, DependentCreateView, DependentUpdateDeleteView, ProxyStatusView\\n\\nurlpatterns = [\\n    path(\"\", home, name=\"home\"),\\n    path(\"about/\", about, name=\"about\"),\\n    path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),\\n    path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),\\n    path(\"login/\", LoginView.as_view(), name=\"login\"),\\n    path(\"logout/\", LogoutView.as_view(), name=\"logout\"),\\n    path(\"me/\", CurrentUserView.as_view(), name=\"me\"),\\n    path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),\\n    path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),\\n    path(\"family/dependents/create/\", DependentCreateView.as_view(), name=\"create_dependent\"),\\n    path(\"family/dependents/<int:pk>/\", DependentUpdateDeleteView.as_view(), name=\"dependent_detail\"),\\n    path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),\\n]\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Venv django check final",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Restore accounts urls without angle brackets in shell",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; lt=chr(60); gt=chr(62); pk=lt+'int:pk'+gt; lines=['from django.urls import path','from .views import home, about, CreateUserView, GuestUserView, LoginView, LogoutView, CurrentUserView, DeleteUserView, FamilyMembersView, DependentCreateView, DependentUpdateDeleteView, ProxyStatusView','','urlpatterns = [','    path(\"\", home, name=\"home\"),','    path(\"about/\", about, name=\"about\"),','    path(\"signup/\", CreateUserView.as_view(), name=\"signup\"),','    path(\"guest/\", GuestUserView.as_view(), name=\"guest_signup\"),','    path(\"login/\", LoginView.as_view(), name=\"login\"),','    path(\"logout/\", LogoutView.as_view(), name=\"logout\"),','    path(\"me/\", CurrentUserView.as_view(), name=\"me\"),','    path(\"delete/\", DeleteUserView.as_view(), name=\"delete\"),','    path(\"family/\", FamilyMembersView.as_view(), name=\"family\"),','    path(\"family/dependents/create/\", DependentCreateView.as_view(), name=\"create_dependent\"),',f'    path(\"family/dependents/{pk}/\", DependentUpdateDeleteView.as_view(), name=\"dependent_detail\"),','    path(\"proxy-status/\", ProxyStatusView.as_view(), name=\"proxy_status\"),',']']; Path('accounts/urls.py').write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Venv django check after safe urls restore",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite accounts urls with generated single quotes",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; q=chr(39); lt=chr(60); gt=chr(62); pk=lt+'int:pk'+gt; lines=['from django.urls import path','from .views import home, about, CreateUserView, GuestUserView, LoginView, LogoutView, CurrentUserView, DeleteUserView, FamilyMembersView, DependentCreateView, DependentUpdateDeleteView, ProxyStatusView','','urlpatterns = [','    path(' + q + q + ', home, name=' + q + 'home' + q + '),','    path(' + q + 'about/' + q + ', about, name=' + q + 'about' + q + '),','    path(' + q + 'signup/' + q + ', CreateUserView.as_view(), name=' + q + 'signup' + q + '),','    path(' + q + 'guest/' + q + ', GuestUserView.as_view(), name=' + q + 'guest_signup' + q + '),','    path(' + q + 'login/' + q + ', LoginView.as_view(), name=' + q + 'login' + q + '),','    path(' + q + 'logout/' + q + ', LogoutView.as_view(), name=' + q + 'logout' + q + '),','    path(' + q + 'me/' + q + ', CurrentUserView.as_view(), name=' + q + 'me' + q + '),','    path(' + q + 'delete/' + q + ', DeleteUserView.as_view(), name=' + q + 'delete' + q + '),','    path(' + q + 'family/' + q + ', FamilyMembersView.as_view(), name=' + q + 'family' + q + '),','    path(' + q + 'family/dependents/create/' + q + ', DependentCreateView.as_view(), name=' + q + 'create_dependent' + q + '),','    path(' + q + 'family/dependents/' + pk + '/' + q + ', DependentUpdateDeleteView.as_view(), name=' + q + 'dependent_detail' + q + '),','    path(' + q + 'proxy-status/' + q + ', ProxyStatusView.as_view(), name=' + q + 'proxy_status' + q + '),',']']; Path('accounts/urls.py').write_text(chr(10).join(lines)+chr(10), encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Venv django check after quote-safe urls",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check clean final unique",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Add accounts app_name",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/urls.py'); s=p.read_text(encoding='utf-8'); s=s if 'app_name = \"accounts\"' in s else s.replace('from .views import home, about, CreateUserView, GuestUserView, LoginView, LogoutView, CurrentUserView, DeleteUserView, FamilyMembersView, DependentCreateView, DependentUpdateDeleteView, ProxyStatusView\\n\\n','from .views import home, about, CreateUserView, GuestUserView, LoginView, LogoutView, CurrentUserView, DeleteUserView, FamilyMembersView, DependentCreateView, DependentUpdateDeleteView, ProxyStatusView\\n\\napp_name = \"accounts\"\\n\\n'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Namespace accounts include",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('scc/urls.py'); s=p.read_text(encoding='utf-8'); old='    path(\"\", include(\"accounts.urls\")),'; new='    path(\"\", include((\"accounts.urls\", \"accounts\"), namespace=\"accounts\")),'; s=s.replace(old,new); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check accounts namespace fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check namespace final confirm",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Set login redirect to plain home",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('scc/settings.py'); s=p.read_text(encoding='utf-8'); s=s.replace('LOGIN_REDIRECT_URL = \"accounts:home\"','LOGIN_REDIRECT_URL = \"home\"'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after redirect fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Remove broken app_name line",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('accounts/urls.py'); lines=[line for line in p.read_text(encoding='utf-8').splitlines() if line.strip() != 'app_name = accounts']; p.write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Set login redirect line safely",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('scc/settings.py'); lines=p.read_text(encoding='utf-8').splitlines(); out=[('LOGIN_REDIRECT_URL = \"home\"' if line.startswith('LOGIN_REDIRECT_URL = ') else line) for line in lines]; p.write_text('\\n'.join(out)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after app_name removal",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fix LOGIN_REDIRECT_URL string",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('scc/settings.py'); lines=p.read_text(encoding='utf-8').splitlines(); out=[('LOGIN_REDIRECT_URL = \"home\"' if line.startswith('LOGIN_REDIRECT_URL = ') else line) for line in lines]; p.write_text('\\n'.join(out)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Check Django after redirect fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Quote-safe login redirect fix",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; q=chr(39); p=Path('scc/settings.py'); lines=p.read_text(encoding='utf-8').splitlines(); out=[(f'LOGIN_REDIRECT_URL = {q}home{q}' if line.startswith('LOGIN_REDIRECT_URL = ') else line) for line in lines]; p.write_text('\\n'.join(out)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after final redirect quote fix",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Remove crispy from account templates",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; files=['templates/account/login.html','templates/account/signup.html','templates/account/logout.html','templates/account/password_set.html'];\nfor fp in files:\n p=Path(fp); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); s=s.replace('{{ form | crispy }}','{{ form.as_p }}'); p.write_text(s,encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite auth templates without crispy",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; files=['templates/account/login.html','templates/account/signup.html','templates/account/logout.html','templates/account/password_set.html'];\nfor fp in files:\n p=Path(fp); t=p.read_text(encoding='utf-8'); t=t.replace('{% load crispy_forms_tags %}\\n',''); t=t.replace('{{ form|crispy }}','{{ form.as_p }}'); t=t.replace('{{ form | crispy }}','{{ form.as_p }}'); p.write_text(t, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite login template no crispy",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('templates/account/login.html').write_text('{% extends \"base.html\" %}\\n\\n{% block title %}Log In{% endblock title %}\\n\\n{% block content %}\\n  <h2>Log In</h2>\\n  <form method=\"post\">\\n    {% csrf_token %}\\n    {{ form.as_p }}\\n    <button class=\"btn btn-success\" type=\"submit\">Log In</button>\\n  </form>\\n{% endblock content %}\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite signup template no crispy",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('templates/account/signup.html').write_text('{% extends \"base.html\" %}\\n\\n{% block title %}Sign Up{% endblock title %}\\n\\n{% block content %}\\n  <h2>Sign Up</h2>\\n  <form method=\"post\">\\n    {% csrf_token %}\\n    {{ form.as_p }}\\n    <button class=\"btn btn-success\" type=\"submit\">Sign Up</button>\\n  </form>\\n{% endblock content %}\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite logout template no crispy",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('templates/account/logout.html').write_text('{% extends \"base.html\" %}\\n\\n{% block title %}Log Out{% endblock %}\\n\\n{% block content %}\\n  <h1>Log Out</h1>\\n  <p>Are you sure you want to log out?</p>\\n  <form method=\"post\" action=\"{% url \\'account_logout\\' %}\">\\n    {% csrf_token %}\\n    {{ form.as_p }}\\n    <button class=\"btn btn-danger\" type=\"submit\">Log Out</button>\\n  </form>\\n{% endblock content %}\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite password set template no crispy",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path('templates/account/password_set.html').write_text('{% extends \"base.html\" %}\\n\\n{% block title %}Set Password{% endblock title %}\\n\\n{% block content %}\\n<form method=\"POST\" action=\"\" class=\"password_set\">\\n  {% csrf_token %}\\n  {{ form.as_p }}\\n  <div class=\"form-actions\">\\n    <button class=\"btn btn-primary\" type=\"submit\" name=\"action\" value=\"Set Password\">Change Password</button>\\n  </div>\\n</form>\\n{% endblock content %}\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after crispy removal",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Enable crispy in settings",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path\np=Path('scc/settings.py')\nlines=p.read_text(encoding='utf-8').splitlines()\ntext='\\n'.join(lines)+'\\n'\nif '\"crispy_forms\"' not in text:\n    text=text.replace('    \"allauth.socialaccount\",\\n', '    \"allauth.socialaccount\",\\n    \"crispy_forms\",\\n    \"crispy_bootstrap5\",\\n')\nif 'CRISPY_ALLOWED_TEMPLATE_PACKS' not in text:\n    text += '\\nCRISPY_ALLOWED_TEMPLATE_PACKS = \"bootstrap5\"\\nCRISPY_TEMPLATE_PACK = \"bootstrap5\"\\n'\np.write_text(text, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Django check after enabling crispy",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch login crispy safely",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/login.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch signup crispy safely",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/signup.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch logout crispy safely",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/logout.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch password_set crispy safely",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/password_set.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form | crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Fresh django check now",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"check"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch login crispy final",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/login.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch signup crispy final",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/signup.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch logout crispy final",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/logout.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form|crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Patch password_set crispy final",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path('templates/account/password_set.html'); s=p.read_text(encoding='utf-8'); s=s.replace('{% load crispy_forms_tags %}\\n',''); s=s.replace('{{ form | crispy }}','{{ form.as_p }}'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Template compile smoke test",
+			"type": "shell",
+			"command": "c:/Users/hansh/MYSCC26/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE','scc.settings'); import django; django.setup(); from django.template.loader import get_template; [get_template(n) for n in ['account/login.html','account/signup.html','account/logout.html','account/password_set.html']]; print('OK templates')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Create Verify CMD Script",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"cd /d c:\\Users\\hansh\\MYSCC26 && type nul > verify_scc.cmd && echo @echo off>>verify_scc.cmd && echo setlocal>>verify_scc.cmd && echo cd /d %%~dp0>>verify_scc.cmd && echo.>>verify_scc.cmd && echo set \"PY_EXE=.venv\\Scripts\\python.exe\">>verify_scc.cmd && echo if not exist \"%%PY_EXE%%\" ^(>>verify_scc.cmd && echo   echo [ERROR] Missing venv python: %%PY_EXE%%>>verify_scc.cmd && echo   echo Create the environment first, then re-run this script.>>verify_scc.cmd && echo   exit /b 1>>verify_scc.cmd && echo ^)>>verify_scc.cmd && echo.>>verify_scc.cmd && echo echo [1/2] Running Django system check...>>verify_scc.cmd && echo \"%%PY_EXE%%\" manage.py check>>verify_scc.cmd && echo if errorlevel 1 exit /b 1>>verify_scc.cmd && echo.>>verify_scc.cmd && echo echo [2/2] Running auth template smoke test...>>verify_scc.cmd && echo \"%%PY_EXE%%\" -c \"import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE','scc.settings'); import django; django.setup(); from django.template.loader import get_template; [get_template(n) for n in ['account/login.html','account/signup.html','account/logout.html','account/password_set.html']]; print('OK: templates load')\">>verify_scc.cmd && echo if errorlevel 1 exit /b 1>>verify_scc.cmd && echo.>>verify_scc.cmd && echo echo [PASS] All checks succeeded.>>verify_scc.cmd && echo exit /b 0>>verify_scc.cmd"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite Verify Script Via Python",
+			"type": "shell",
+			"command": "c:\\Users\\hansh\\MYSCC26\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; Path(r'c:\\Users\\hansh\\MYSCC26\\verify_scc.cmd').write_text('X\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Write verify_scc.cmd final",
+			"type": "shell",
+			"command": "c:\\Users\\hansh\\MYSCC26\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; from textwrap import dedent; Path(r'c:\\Users\\hansh\\MYSCC26\\verify_scc.cmd').write_text(dedent('''@echo off\nsetlocal\ncd /d \"%~dp0\"\n\nset \"PY_EXE=.venv\\Scripts\\python.exe\"\nif not exist \"%PY_EXE%\" (\n  echo [ERROR] Missing venv python: %PY_EXE%\n  echo Create the environment first, then re-run this script.\n  exit /b 1\n)\n\necho [1/2] Running Django system check...\n\"%PY_EXE%\" manage.py check\nif errorlevel 1 exit /b 1\n\necho [2/2] Running auth template smoke test...\n\"%PY_EXE%\" -c \"import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE','scc.settings'); import django; django.setup(); from django.template.loader import get_template; [get_template(n) for n in ['account/login.html','account/signup.html','account/logout.html','account/password_set.html']]; print('OK: templates load')\"\nif errorlevel 1 exit /b 1\n\necho [PASS] All checks succeeded.\nexit /b 0\n'''), encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Run verify_scc.cmd",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"cd /d c:\\Users\\hansh\\MYSCC26 && verify_scc.cmd"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Write verify_scc.cmd via chr37",
+			"type": "shell",
+			"command": "c:\\Users\\hansh\\MYSCC26\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path(r'c:\\Users\\hansh\\MYSCC26\\verify_scc.cmd'); pct=chr(37); lines=['@echo off','setlocal',f'cd /d \"{pct}~dp0\"','', 'set \"PY_EXE=.venv\\\\Scripts\\\\python.exe\"', f'if not exist \"{pct}PY_EXE{pct}\" (', f'  echo [ERROR] Missing venv python: {pct}PY_EXE{pct}', '  echo Create the environment first, then re-run this script.', '  exit /b 1', ')', '', 'echo [1/2] Running Django system check...', f'\"{pct}PY_EXE{pct}\" manage.py check', 'if errorlevel 1 exit /b 1', '', 'echo [2/2] Running auth template smoke test...', f'\"{pct}PY_EXE{pct}\" -c \"import os; os.environ.setdefault(\\'DJANGO_SETTINGS_MODULE\\',\\'scc.settings\\'); import django; django.setup(); from django.template.loader import get_template; [get_template(n) for n in [\\'account/login.html\\',\\'account/signup.html\\',\\'account/logout.html\\',\\'account/password_set.html\\']]; print(\\'OK: templates load\\')\"', 'if errorlevel 1 exit /b 1', '', 'echo [PASS] All checks succeeded.', 'exit /b 0']; p.write_text('\\n'.join(lines)+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Generate verify_scc.cmd escaped",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"cd /d c:\\Users\\hansh\\MYSCC26 && type nul > verify_scc.cmd && echo @echo off>>verify_scc.cmd && echo setlocal>>verify_scc.cmd && echo cd /d %%~dp0>>verify_scc.cmd && echo.>>verify_scc.cmd && echo set \"PY_EXE=.venv\\Scripts\\python.exe\">>verify_scc.cmd && echo if not exist \"%%PY_EXE%%\" ^(>>verify_scc.cmd && echo   echo [ERROR] Missing venv python: %%PY_EXE%%>>verify_scc.cmd && echo   echo Create the environment first, then re-run this script.>>verify_scc.cmd && echo   exit /b 1>>verify_scc.cmd && echo ^)>>verify_scc.cmd && echo.>>verify_scc.cmd && echo echo [1/2] Running Django system check...>>verify_scc.cmd && echo \"%%PY_EXE%%\" manage.py check>>verify_scc.cmd && echo if errorlevel 1 exit /b 1>>verify_scc.cmd && echo.>>verify_scc.cmd && echo set \"SMOKE=import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE','scc.settings'); import django; django.setup(); from django.template.loader import get_template; [get_template(n) for n in ('account/login.html','account/signup.html','account/logout.html','account/password_set.html')]; print('OK: templates load')\">>verify_scc.cmd && echo echo [2/2] Running auth template smoke test...>>verify_scc.cmd && echo \"%%PY_EXE%%\" -c \"%%SMOKE%%\">>verify_scc.cmd && echo if errorlevel 1 exit /b 1>>verify_scc.cmd && echo.>>verify_scc.cmd && echo echo [PASS] All checks succeeded.>>verify_scc.cmd && echo exit /b 0>>verify_scc.cmd"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Normalize verify_scc.cmd percents",
+			"type": "shell",
+			"command": "c:\\Users\\hansh\\MYSCC26\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path(r'c:\\Users\\hansh\\MYSCC26\\verify_scc.cmd'); s=p.read_text(encoding='utf-8'); s=s.replace('%%','%'); s=s.replace('exit /b  ','exit /b 1'); p.write_text(s, encoding='utf-8')"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Execute verify_scc.cmd",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"cd /d c:\\Users\\hansh\\MYSCC26 && verify_scc.cmd"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Append explicit exit code to verify_scc.cmd",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"cd /d c:\\Users\\hansh\\MYSCC26 && echo exit /b 0>>verify_scc.cmd"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Ensure verify_scc.cmd explicit success exit",
+			"type": "shell",
+			"command": "c:\\Users\\hansh\\MYSCC26\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path(r'c:\\Users\\hansh\\MYSCC26\\verify_scc.cmd'); s=p.read_text(encoding='utf-8').rstrip(); s=s if s.endswith('exit /b 0') else s+'\\nexit /b 0'; p.write_text(s+'\\n', encoding='utf-8')"
+			],
+			"isBackground": false
 		}
 	]
 }

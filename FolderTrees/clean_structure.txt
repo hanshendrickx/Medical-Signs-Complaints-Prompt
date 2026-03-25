@@ -1,4 +1,4 @@
-PROJECT Project Tree Generated on 2026-03-23 15:16:15
+PROJECT Project Tree Generated on 2026-03-25 14:27:56
 Root: 
 (c) 2024 Hans Hendrickx - MIT License
 Professional Folder Tree Generator
@@ -25,19 +25,22 @@ Project Structure Legend:
 │ │ ├─ 📄 __init__.cpython-314.pyc
 │ │ ├─ 📄 admin.cpython-314.pyc
 │ │ ├─ 📄 apps.cpython-314.pyc
+│ │ ├─ 📄 middleware.cpython-314.pyc
 │ │ ├─ 📄 models.cpython-314.pyc
-│ │ ├─ 📄 urls.cpython-314.pyc
-│ │ └─ ... (1 more files)
+│ │ └─ ... (4 more files)
+│ ├─ 📁 management/
+│ │ └─ 📁 commands/
 │ ├─ 📂 migrations/
 │ │ ├─ 📁 __pycache__/
 │ │ ├─ 🐍 0001_initial.py
+│ │ ├─ 🐍 0002_alter_familyuser_options_familyuser_country_and_more.py
 │ │ └─ 🐍 __init__.py
 │ ├─ 🐍 __init__.py
 │ ├─ 🐍 admin.py
 │ ├─ 🐍 apps.py
+│ ├─ 🐍 middleware.py
 │ ├─ 🐍 models.py
-│ ├─ 🐍 tests.py
-│ └─ ... (2 more files)
+│ └─ ... (4 more files)
 ├─ 📁 complaints/
 │ ├─ 📁 __pycache__/
 │ │ ├─ 📄 __init__.cpython-314.pyc
@@ -63,8 +66,12 @@ Project Structure Legend:
 │ ├─ 📄 clean_structure.txt
 │ └─ 📄 structure.txt
 ├─ 📁 FolderTrees/
+│ ├─ 📄 clean_structure.txt
 │ └─ 📄 structure.txt
 ├─ 📁 media/
+│ └─ 📁 www_links/
+│   ├─ 📝 www.links.md
+│   └─ 📄 www.links.pdf
 ├─ 📁 scc/
 │ ├─ 📁 __pycache__/
 │ │ ├─ 📄 __init__.cpython-314.pyc
@@ -82,19 +89,27 @@ Project Structure Legend:
 │ ├─ 📁 images/
 │ └─ 📁 js/
 ├─ 📂 templates/
-│ ├─ 📁 accounts/
-│ │ ├─ 📁 accounts/
+│ ├─ 📁 account/
+│ │ ├─ 📁 email/
+│ │ ├─ 🌐 about.html
 │ │ ├─ 🌐 base.html
-│ │ └─ 🌐 home.html
+│ │ ├─ 🌐 email_confirm.html
+│ │ ├─ 🌐 home.html
+│ │ ├─ 📄 info_PM.txt
+│ │ └─ ... (5 more files)
+│ ├─ 📁 FolderTrees/
+│ ├─ 🌐 403_csrf.html
+│ ├─ 🌐 404.html
+│ ├─ 🌐 500.html
 │ └─ 🌐 base.html
 ├─ ⚙️ !Folder_Tree.bat
+├─ 📄 !GITHUB.CMD
+├─ 📄 !PUSH.CMD
 ├─ 📄 !restart_scc.cmd
-├─ ⚙️ !restartVE.bat
 ├─ ⚙️ !sync_black_ruff_env.bat
-├─ 🐍 _patch_home.py
-└─ ... (17 more files)
+└─ ... (20 more files)
 
 --------------------------------------------------------------------------------
-Total Folders: 22
-Total Files: 47
-Total Size: 116.9 KB
+Total Folders: 26
+Total Files: 57
+Total Size: 162.5 KB

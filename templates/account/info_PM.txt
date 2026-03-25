@@ -1,0 +1,1 @@
+https://github.com/wsvincent/lithium/blob/main/templates/_base.html{%load static%}

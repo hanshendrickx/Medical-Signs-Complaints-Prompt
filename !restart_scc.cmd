@@ -1,7 +1,7 @@
 @echo off
 REM run this script by [CTRL+F5]
 setlocal
-
+cd
 cd /d %~dp0
 
 set "PY=.venv\Scripts\python.exe"

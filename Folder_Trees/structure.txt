@@ -1,5 +1,5 @@
 PROJECT Project Tree Generated on 2026-03-23 15:13:26
-Root: 
+Root:
 (c) 2024 Hans Hendrickx - MIT License
 Professional Folder Tree Generator
 
@@ -84,8 +84,8 @@ Project Structure Legend:
 │ ├─ 📁 css/
 │ ├─ 📁 images/
 │ └─ 📁 js/
-├─ 📂 templates/
-│ ├─ 📁 accounts/
+├─ 📂 template/
+│ ├─ 📁 account/
 │ │ ├─ 📁 accounts/
 │ │ ├─ 🌐 base.html
 │ │ └─ 🌐 home.html
