@@ -1,3 +1,23 @@
+## Quick Setup
+# Restart via !restart_scc.cmd
+1.  ✅ **Base_Tools**: Windows 10, VSCode, Django6, Python 3.14, .Dotenv, Black, Russ
+2.  ✅ **Extra Packages**: REST, django debug_Toolbar, Allauth, corsheaders, CSRF
+3.  ✅ **Font** Noto Sans Google font, International USeng+Dutch
+4.  ✅ **!restart_scc.cmd with tests** R-click file and "run" via [CTRL+F5]
+5.  ✅ **!sync_black_ruff_env.bat** R-click file and "run" via [CTRL+F5]
+6.  ✅ **Folder_Tree** To create pro folder trees
+
+6.  Run the setup batch file:
+
+7.  ✅ **Secure authentication** for family members and Anonymous Guest
+8.  ✅ **safe production-aware** safe cleanup settings
+9.  ✅ **Private data storage** with encryption
+10. ✅ **REST API** for symptom and complaint collection
+11. ✅ **AI prompt generation** for medical analysis
+12. ✅ **Family member profiles** for all ages
+13. ✅ **Proxy for Children and Disabled member profiles** for all ages, depening         .on international law and customs
+14. ✅ **Doctor preparation tools**
+
 ## CMD Recovery
 
 Run this from project root when migrations or DB history get stuck:
@@ -22,26 +42,6 @@ A secure, private medical data collection app for families to track symptoms and
 - 📝 **Symptom Tracking** - Log signs and current complaints
 - 🤖 **AI-Ready Summaries** - Generate structured prompts for medical AI analysis
 - 🏥 **Doctor Preparation** - Get answers to: "Do I need a doctor?", patient guidelines, physician guidelines, and follow-up questions
-
-## Quick Setup
-# Restart via !restart_scc.cmd
-1.  ✅ **Base_Tools**: Windows 10, VSCode, Django6, Python 3.14, .Dotenv, Black, Russ
-2.  ✅ **Extra Packages**: REST, django debug_Toolbar, Allauth, corsheaders
-3.  ✅ **Font** Noto Sans Google font, International USeng+Dutch
-4.  ✅ **!restart_scc.cmd with tests** R-click file and "run" via [CTRL+F5]
-5.  ✅ **!sync_black_ruff_env.bat** R-click file and "run" via [CTRL+F5]
-6.  ✅ **Folder_Tree** To create pro folder trees
-
-6.  Run the setup batch file:
-
-7.  ✅ **Secure authentication** for family members and Anonymous Guest
-8.  ✅ **safe production-aware** safe cleanup settings
-9.  ✅ **Private data storage** with encryption
-10. ✅ **REST API** for symptom and complaint collection
-11. ✅ **AI prompt generation** for medical analysis
-12. ✅ **Family member profiles** for all ages
-13. ✅ **Proxy for Children and Disabled member profiles** for all ages, depening         .on international law and customs
-14. ✅ **Doctor preparation tools**
 
 📂 MYSCC26/
 ├─ 📁 accounts/

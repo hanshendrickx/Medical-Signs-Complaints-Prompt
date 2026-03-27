@@ -1,8 +1,13 @@
 @echo off
 REM run this script by [CTRL+F5]
 setlocal
-cd
+cmd
+cd /d C:\Users\hansh\MYSCC26!My_Help_Packges
+call "!01restart_sccOLD.cmd"
 cd /d %~dp0
+cd c:\Users\hansh\MYSCC26\
+cd C:\Users\hansh\MYSCC26\
+C:\Users\hansh\MYSCC26\.venv\Scripts\activate.bat
 
 set "PY=.venv\Scripts\python.exe"
 if not exist "%PY%" (

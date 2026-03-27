@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SCC - Signs and Current Complaints">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <title>{% block title %}SCC{% endblock %}</title>
 
     <!-- Noto Sans: covers 1000+ scripts, best for international audiences -->
@@ -205,8 +206,7 @@
             <hr class="my-3">
 
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 small text-body-secondary">
-                <span>SCC &copy; {% now "Y" %} - Signs &amp; Current Complaints</span>
-                <span id="designer-info">Designer info: SCC internal build workspace.</span>
+                <span {font-size: 9px}><w3-tiny>SCC &copy; {% now "Y" %} - <a <span style="font-size: 9px;">{% now "Y" %}</span>href="https://figshare.com/authors/Hans_Hendrickx/6880208" target="_blank" rel="noopener noreferrer">Dr. Hans Hendrickx, M.D., Ph.D., LLB. with href=" with {Licence MIT</a></Small>}</span>
             </div>
         </div>
     </footer>

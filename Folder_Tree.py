@@ -791,12 +791,12 @@ Examples:
             show_size=args.show_size,
             show_hidden=args.show_hidden,
             sort_dirs_first=not args.no_sort_dirs,
-            include_categories=set(args.include_categories)
-            if args.include_categories
-            else None,
-            exclude_patterns=set(args.exclude_patterns)
-            if args.exclude_patterns
-            else None,
+            include_categories=(
+                set(args.include_categories) if args.include_categories else None
+            ),
+            exclude_patterns=(
+                set(args.exclude_patterns) if args.exclude_patterns else None
+            ),
         )
 
         # Determine output format and save

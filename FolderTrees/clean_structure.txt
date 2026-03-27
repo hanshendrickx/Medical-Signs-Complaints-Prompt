@@ -1,4 +1,4 @@
-PROJECT Project Tree Generated on 2026-03-25 14:27:56
+PROJECT Project Tree Generated on 2026-03-25 18:12:46
 Root: 
 (c) 2024 Hans Hendrickx - MIT License
 Professional Folder Tree Generator
@@ -74,10 +74,12 @@ Project Structure Legend:
 │   └─ 📄 www.links.pdf
 ├─ 📁 scc/
 │ ├─ 📁 __pycache__/
+│ │ ├─ 📄 __init__.cpython-312.pyc
 │ │ ├─ 📄 __init__.cpython-314.pyc
+│ │ ├─ 📄 settings.cpython-312.pyc
 │ │ ├─ 📄 settings.cpython-314.pyc
 │ │ ├─ 📄 urls.cpython-314.pyc
-│ │ └─ 📄 wsgi.cpython-314.pyc
+│ │ └─ ... (1 more files)
 │ ├─ 🐍 __init__.py
 │ ├─ 🐍 asgi.py
 │ ├─ 📝 DISCLAIMER FOR MEDICAL APP.md
@@ -91,25 +93,30 @@ Project Structure Legend:
 ├─ 📂 templates/
 │ ├─ 📁 account/
 │ │ ├─ 📁 email/
+│ │ ├─ 🌐 email_confirm.html
+│ │ ├─ 📄 info_PM.txt
+│ │ ├─ 🌐 login.html
+│ │ ├─ 🌐 logout.html
+│ │ ├─ 🌐 password_set.html
+│ │ └─ ... (1 more files)
+│ ├─ 📁 accounts/
 │ │ ├─ 🌐 about.html
 │ │ ├─ 🌐 base.html
-│ │ ├─ 🌐 email_confirm.html
 │ │ ├─ 🌐 home.html
-│ │ ├─ 📄 info_PM.txt
-│ │ └─ ... (5 more files)
-│ ├─ 📁 FolderTrees/
+│ │ └─ 🌐 profile.html
 │ ├─ 🌐 403_csrf.html
 │ ├─ 🌐 404.html
 │ ├─ 🌐 500.html
+│ ├─ 🌐 _base.html
 │ └─ 🌐 base.html
 ├─ ⚙️ !Folder_Tree.bat
 ├─ 📄 !GITHUB.CMD
 ├─ 📄 !PUSH.CMD
 ├─ 📄 !restart_scc.cmd
 ├─ ⚙️ !sync_black_ruff_env.bat
-└─ ... (20 more files)
+└─ ... (23 more files)
 
 --------------------------------------------------------------------------------
 Total Folders: 26
-Total Files: 57
-Total Size: 162.5 KB
+Total Files: 63
+Total Size: 169.8 KB

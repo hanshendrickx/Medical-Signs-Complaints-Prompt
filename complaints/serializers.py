@@ -77,9 +77,11 @@ class SymptomSummarySerializer(serializers.Serializer):
             "vital_signs": {
                 "temperature": session.temperature,
                 "heart_rate": session.heart_rate,
-                "blood_pressure": f"{session.blood_pressure_systolic}/{session.blood_pressure_diastolic}"
-                if session.blood_pressure_systolic
-                else None,
+                "blood_pressure": (
+                    f"{session.blood_pressure_systolic}/{session.blood_pressure_diastolic}"
+                    if session.blood_pressure_systolic
+                    else None
+                ),
                 "oxygen_saturation": session.oxygen_saturation,
             },
             "reported_symptoms": [],
