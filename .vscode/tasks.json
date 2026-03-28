@@ -1911,6 +1911,69 @@
 				"from pathlib import Path; p=Path(r'c:\\Users\\hansh\\MYSCC26\\verify_scc.cmd'); s=p.read_text(encoding='utf-8').rstrip(); s=s if s.endswith('exit /b 0') else s+'\\nexit /b 0'; p.write_text(s+'\\n', encoding='utf-8')"
 			],
 			"isBackground": false
+		},
+		{
+			"label": "Write test marker via task",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"echo taskwrite>ZZZ_TASK_WRITE.txt"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite folder tree helper bats",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/v:off",
+				"/c",
+				"(echo @echo off& echo setlocal& echo.& echo rem Move to repo root regardless of where this .bat is launched from& echo set \"ROOT=%%~dp0..\"& echo pushd \"%%ROOT%%\" ^>nul& echo.& echo set \"OUTDIR=FolderTrees\"& echo if not exist \"%%OUTDIR%%\" mkdir \"%%OUTDIR%%\"& echo.& echo rem Pick Python interpreter: project venv first, then launcher fallback& echo set \"PYEXE=.venv\\Scripts\\python.exe\"& echo if exist \"%%PYEXE%%\" ^(& echo   set \"PY=%%PYEXE%%\"& echo ^) else ^(& echo   set \"PY=py -3\"& echo ^)& echo.& echo rem Current directory -^> FolderTrees\\structure.txt& echo %%PY%% Folder_Tree.py . -o \"%%OUTDIR%%\\structure.txt\" --style simple --icons simple --depth 3& echo.& echo rem Example custom folder ^(edit path as needed^) -^> FolderTrees\\custom_structure.txt& echo rem %%PY%% Folder_Tree.py \"C:\\path\\to\\folder\" -o \"%%OUTDIR%%\\custom_structure.txt\" --style simple --icons simple --depth 3& echo.& echo rem Clean output -^> FolderTrees\\clean_structure.txt& echo %%PY%% Folder_Tree.py . -o \"%%OUTDIR%%\\clean_structure.txt\" --style simple --icons simple --depth 3 --max-files 5& echo.& echo popd ^>nul& echo endlocal) > \"!My_Help_Packges\\!Folder_Tree.bat\" && (echo @echo off& echo setlocal& echo.& echo rem Run from repo root even when launched inside !My_Help_Packges& echo set \"ROOT=%%~dp0..\"& echo pushd \"%%ROOT%%\" ^>nul& echo.& echo set \"OUTDIR=FolderTrees\\!FolderTreeClassic\"& echo if not exist \"%%OUTDIR%%\" mkdir \"%%OUTDIR%%\"& echo.& echo set \"PYEXE=.venv\\Scripts\\python.exe\"& echo if exist \"%%PYEXE%%\" ^(& echo   set \"PY=%%PYEXE%%\"& echo ^) else ^(& echo   set \"PY=py -3\"& echo ^)& echo.& echo echo Generating classic folder trees for depths 2,3,4,5...& echo %%PY%% Folder_Tree.py . -o \"%%OUTDIR%%\\tree_level_2.txt\" --style simple --icons simple --depth 2& echo %%PY%% Folder_Tree.py . -o \"%%OUTDIR%%\\tree_level_3.txt\" --style simple --icons simple --depth 3& echo %%PY%% Folder_Tree.py . -o \"%%OUTDIR%%\\tree_level_4.txt\" --style simple --icons simple --depth 4& echo %%PY%% Folder_Tree.py . -o \"%%OUTDIR%%\\tree_level_5.txt\" --style simple --icons simple --depth 5& echo.& echo echo Done. Files are in %%OUTDIR%%& echo popd ^>nul& echo endlocal) > \"!My_Help_Packges\\!FolderTreeClassic.bat\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Normalize percent signs in helper bats",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p1='!My_Help_Packges\\!Folder_Tree.bat'; $p2='!My_Help_Packges\\!FolderTreeClassic.bat'; (Get-Content -LiteralPath $p1 -Raw).Replace('%%','%') | Set-Content -LiteralPath $p1 -Encoding Ascii; (Get-Content -LiteralPath $p2 -Raw).Replace('%%','%') | Set-Content -LiteralPath $p2 -Encoding Ascii"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Rewrite helper bats without percent vars",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/v:off",
+				"/c",
+				"(echo @echo off& echo setlocal& echo cd /d c:\\Users\\hansh\\MYSCC26& echo if not exist \"FolderTrees\" mkdir \"FolderTrees\"& echo.& echo if exist \".venv\\Scripts\\python.exe\" ^(& echo   \".venv\\Scripts\\python.exe\" Folder_Tree.py . -o \"FolderTrees\\structure.txt\" --style simple --icons simple --depth 3& echo   rem \".venv\\Scripts\\python.exe\" Folder_Tree.py \"C:\\path\\to\\folder\" -o \"FolderTrees\\custom_structure.txt\" --style simple --icons simple --depth 3& echo   \".venv\\Scripts\\python.exe\" Folder_Tree.py . -o \"FolderTrees\\clean_structure.txt\" --style simple --icons simple --depth 3 --max-files 5& echo ^) else ^(& echo   py -3 Folder_Tree.py . -o \"FolderTrees\\structure.txt\" --style simple --icons simple --depth 3& echo   rem py -3 Folder_Tree.py \"C:\\path\\to\\folder\" -o \"FolderTrees\\custom_structure.txt\" --style simple --icons simple --depth 3& echo   py -3 Folder_Tree.py . -o \"FolderTrees\\clean_structure.txt\" --style simple --icons simple --depth 3 --max-files 5& echo ^)& echo endlocal) > \"!My_Help_Packges\\!Folder_Tree.bat\" && (echo @echo off& echo setlocal& echo cd /d c:\\Users\\hansh\\MYSCC26& echo if not exist \"FolderTrees\\!FolderTreeClassic\" mkdir \"FolderTrees\\!FolderTreeClassic\"& echo echo Generating classic folder trees for depths 2,3,4,5...& echo.& echo if exist \".venv\\Scripts\\python.exe\" ^(& echo   \".venv\\Scripts\\python.exe\" Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_2.txt\" --style simple --icons simple --depth 2& echo   \".venv\\Scripts\\python.exe\" Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_3.txt\" --style simple --icons simple --depth 3& echo   \".venv\\Scripts\\python.exe\" Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_4.txt\" --style simple --icons simple --depth 4& echo   \".venv\\Scripts\\python.exe\" Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_5.txt\" --style simple --icons simple --depth 5& echo ^) else ^(& echo   py -3 Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_2.txt\" --style simple --icons simple --depth 2& echo   py -3 Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_3.txt\" --style simple --icons simple --depth 3& echo   py -3 Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_4.txt\" --style simple --icons simple --depth 4& echo   py -3 Folder_Tree.py . -o \"FolderTrees\\!FolderTreeClassic\\tree_level_5.txt\" --style simple --icons simple --depth 5& echo ^)& echo.& echo echo Done. Files are in FolderTrees\\!FolderTreeClassic& echo endlocal) > \"!My_Help_Packges\\!FolderTreeClassic.bat\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Run FolderTreeClassic helper",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"\"!My_Help_Packges\\!FolderTreeClassic.bat\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Cleanup temporary marker file",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"if exist ZZZ_TASK_WRITE.txt del /q ZZZ_TASK_WRITE.txt"
+			],
+			"isBackground": false
 		}
 	]
 }

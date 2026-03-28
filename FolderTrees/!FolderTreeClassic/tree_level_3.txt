@@ -1,0 +1,170 @@
+PROJECT Project Tree Generated on 2026-03-28 09:38:25
+Root: 
+(c) 2024 Hans Hendrickx - MIT License
+Professional Folder Tree Generator
+
+Project Structure Legend:
+📂 - Key Project Directory
+📁 - Regular Directory
+🐍 - Python Source File
+📓 - Jupyter Notebook
+📝 - Markdown File
+📊 - Excel or CSV File
+📄 - PDF File
+📃 - Word Document
+⚙️ - Batch/Script File
+🔧 - JSON or Config File
+🖼️ - Image File
+🎵 - Audio File
+🎬 - Video File
+--------------------------------------------------------------------------------
+
+📂 MYSCC26/
+├─ + !My_Help_Packges/
+│ ├─ + %OUTDIR%/
+│ ├─ + FolderTrees/
+│ ├─ - !00!START_SCC.cmd
+│ ├─ - !black_ruff.cmd
+│ ├─ - !Folder_Tree.bat
+│ ├─ - !FolderTreeClassic.bat
+│ ├─ - !GITHUB.CMD
+│ ├─ M !MAIN_PLAN_Prompt.md
+│ ├─ P !MAIN_PLAN_Prompt.pdf
+│ ├─ - !PUSH.CMD
+│ ├─ - !sync_black_ruff_env.bat
+│ └─ - !verify_scc.cmd
+├─ + accounts/
+│ ├─ + __pycache__/
+│ │ ├─ - __init__.cpython-314.pyc
+│ │ ├─ - admin.cpython-314.pyc
+│ │ ├─ - apps.cpython-314.pyc
+│ │ ├─ - middleware.cpython-314.pyc
+│ │ ├─ - models.cpython-314.pyc
+│ │ ├─ - serializers.cpython-314.pyc
+│ │ ├─ - tests.cpython-314.pyc
+│ │ ├─ - urls.cpython-314.pyc
+│ │ └─ - views.cpython-314.pyc
+│ ├─ + management/
+│ │ └─ + commands/
+│ ├─ 📂 migrations/
+│ │ ├─ + __pycache__/
+│ │ ├─ P 0001_initial.py
+│ │ ├─ P 0002_alter_familyuser_options_familyuser_country_and_more.py
+│ │ └─ P __init__.py
+│ ├─ 📂 templates/
+│ │ └─ + accounts/
+│ ├─ P __init__.py
+│ ├─ P admin.py
+│ ├─ P apps.py
+│ ├─ P middleware.py
+│ ├─ P models.py
+│ ├─ P serializers.py
+│ ├─ P tests.py
+│ ├─ P urls.py
+│ └─ P views.py
+├─ + complaints/
+│ ├─ + __pycache__/
+│ │ ├─ - __init__.cpython-314.pyc
+│ │ ├─ - admin.cpython-314.pyc
+│ │ ├─ - apps.cpython-314.pyc
+│ │ └─ - models.cpython-314.pyc
+│ ├─ 📂 migrations/
+│ │ ├─ + __pycache__/
+│ │ ├─ P 0001_initial.py
+│ │ └─ P __init__.py
+│ ├─ P __init__.py
+│ ├─ P admin.py
+│ ├─ P ai_summary.py
+│ ├─ P apps.py
+│ ├─ P models.py
+│ ├─ P serializers.py
+│ ├─ P tests.py
+│ └─ P views.py
+├─ 📂 docs/
+│ ├─ M api.md
+│ ├─ M security.md
+│ ├─ P security.pdf
+│ └─ M setup.md
+├─ + Folder_Trees/
+│ ├─ T clean_structure.txt
+│ └─ T structure.txt
+├─ + FolderTrees/
+│ ├─ + !FolderTreeClassic/
+│ │ ├─ T tree_level_2.txt
+│ │ ├─ T tree_level_3.txt
+│ │ ├─ T tree_level_4.txt
+│ │ └─ T tree_level_5.txt
+│ ├─ T clean_structure.txt
+│ └─ T structure.txt
+├─ + media/
+│ └─ + www_links/
+│   ├─ M www.links.md
+│   └─ P www.links.pdf
+├─ + scc/
+│ ├─ + __pycache__/
+│ │ ├─ - __init__.cpython-312.pyc
+│ │ ├─ - __init__.cpython-314.pyc
+│ │ ├─ - settings.cpython-312.pyc
+│ │ ├─ - settings.cpython-314.pyc
+│ │ ├─ - urls.cpython-314.pyc
+│ │ └─ - wsgi.cpython-314.pyc
+│ ├─ P __init__.py
+│ ├─ P asgi.py
+│ ├─ M DISCLAIMER FOR MEDICAL APP.md
+│ ├─ P DISCLAIMER FOR MEDICAL APP.pdf
+│ ├─ - LICENSE
+│ ├─ - MYSCC26.code-workspace
+│ ├─ P settings.py
+│ ├─ P urls.py
+│ └─ P wsgi.py
+├─ 📂 static/
+│ ├─ + css/
+│ ├─ + images/
+│ └─ + js/
+├─ 📂 templates/
+│ ├─ + account/
+│ │ ├─ + email/
+│ │ ├─ H email_confirm.html
+│ │ ├─ T info_PM.txt
+│ │ ├─ H login.html
+│ │ ├─ H logout.html
+│ │ ├─ H password_set.html
+│ │ └─ H signup.html
+│ ├─ + accounts/
+│ │ ├─ H about.html
+│ │ ├─ H base.html
+│ │ ├─ H home.html
+│ │ └─ H profile.html
+│ ├─ + FolderTrees/
+│ ├─ H 403_csrf.html
+│ ├─ H 404.html
+│ ├─ H 500.html
+│ ├─ H _base.html
+│ └─ H base.html
+├─ - db.sqlite3
+├─ - db.sqlite3.pre_recovery.bak
+├─ - db.sqlite3.pre_reset_20260321.bak
+├─ P Folder_Tree.py
+├─ - LICENSE
+├─ P main.py
+├─ P manage.py
+├─ - pyproject.toml
+├─ M README.md
+├─ P README.pdf
+├─ M Readme3_25-26.md
+├─ P Readme3_25-26.pdf
+├─ - recover_django.cmd
+├─ T requirements.txt
+├─ T requirementsFT.txt
+├─ - setuo_scc_aoo,bat
+├─ T structure.txt
+├─ T TEST123.txt
+├─ T TEST_WRITE_CMD.txt
+├─ - uv.lock
+├─ T verify_home.txt
+└─ - write_test.tmp
+
+--------------------------------------------------------------------------------
+Total Folders: 33
+Total Files: 111
+Total Size: 5.2 MB
